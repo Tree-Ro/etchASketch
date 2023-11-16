@@ -9,8 +9,6 @@ createGrid(defaultSize);
 
 const cells = document.querySelectorAll('.cell');
 
-//Currently Bugged
-//Loses track of button state if fired over one element and dropped over other
 let mousedown = 0;
 body.addEventListener('mousedown', () => {
     mousedown = 1;
@@ -23,7 +21,6 @@ function createRows(amount) {
     for (i = 0; i < amount; ++i) {
         const row = document.createElement('div');
         row.setAttribute('class', 'row');
-        row.setAttribute('draggable', 'false');
         container.appendChild(row);
     }
 }
@@ -34,7 +31,6 @@ function createCells() {
         for (i = 0; i < rows.length; ++i) {
             const cell = document.createElement('div');
             cell.setAttribute('class', 'cell');
-            cell.setAttribute('draggable', 'false');
             row.appendChild(cell);
         }
     });
