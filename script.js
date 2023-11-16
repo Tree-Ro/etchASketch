@@ -1,22 +1,19 @@
 // Declaring Important constants
 const container = document.querySelector('#container');
 const colorPicker = document.querySelector('#colorPicker');
-const defaultMode = 'colorMode';
 const defaultSize = 16;
 const body = document.querySelector('body');
+let currentColor = colorInterface.value;
+let storedColor = colorInterface.value;
+let random = false;
 
 createGrid(defaultSize);
 draw();
+storeColorListener();
 
 const cells = document.querySelectorAll('.cell');
 
-let mousedown = 0;
-body.addEventListener('mousedown', () => {
-    mousedown = 1;
-});
-body.addEventListener('mouseup', () => {
-    mousedown = 0;
-});
+initialiseButtons();
 
 function createRows(amount) {
     for (i = 0; i < amount; ++i) {
@@ -45,6 +42,9 @@ function createGrid(amount) {
 function draw() {
     container.addEventListener('click', (currentMouseover) => {
         if (currentMouseover.target.classList.contains('cell')) {
+            if (random === true) {
+                colorInterface.value = getRandomColor();
+            }
             currentMouseover.target.setAttribute(
                 'style',
                 `background-color: ${colorInterface.value};`
@@ -57,6 +57,9 @@ function draw() {
             currentMouseover.target.classList.contains('cell') &&
             currentMouseover.buttons === 1
         ) {
+            if (random === true) {
+                colorInterface.value = getRandomColor();
+            }
             currentMouseover.target.setAttribute(
                 'style',
                 `background-color: ${colorInterface.value};`
@@ -65,9 +68,72 @@ function draw() {
     });
 }
 
-function colorMode() {}
+function initialiseButtons() {
+    colorButton.addEventListener('click', () => {
+        colorMode();
+    });
+    eraserButton.addEventListener('click', () => {
+        eraserMode();
+    });
+    randomButton.addEventListener('click', () => {
+        randomMode();
+    });
+    clearButton.addEventListener('click', () => {
+        clearCanvas();
+    });
+}
 
-function eraser() {}
+//Only triggers when user changes color
+function storeColorListener() {
+    colorInterface.addEventListener('change', () => {
+        storedColor = colorInterface.value;
+        colorMode(); // If user changes value activate colorMode
+    });
+}
+
+function removeButtonHighlight() {
+    colorButton.removeAttribute('style');
+    eraserButton.removeAttribute('style');
+    randomButton.removeAttribute('style');
+}
+
+function colorMode() {
+    colorInterface.value = storedColor;
+    removeButtonHighlight();
+    colorButton.setAttribute(
+        'style',
+        'border: 3px solid rgba(0, 0, 0, 0.755); scale: 1.1;'
+    );
+    random = false;
+}
+
+function eraserMode() {
+    colorInterface.value = '#ffffff';
+    removeButtonHighlight();
+    eraserButton.setAttribute(
+        'style',
+        'border: 3px solid rgba(0, 0, 0, 0.755); scale: 1.1;'
+    );
+    random = false;
+}
+
+function randomMode() {
+    removeButtonHighlight();
+    randomButton.setAttribute(
+        'style',
+        'border: 3px solid rgba(0, 0, 0, 0.755); scale: 1.1;'
+    );
+    random = true;
+}
+
+function getRandomColor() {
+    return (
+        '#' +
+        Math.floor(Math.random() * 2 ** 24)
+            .toString(16)
+            .padStart(6, '0')
+    );
+}
 
 function clearCanvas() {
     cells.forEach((cell) => {
@@ -76,3 +142,9 @@ function clearCanvas() {
 }
 
 function changeSize() {}
+
+function removeButtonHighlight() {
+    colorButton.removeAttribute('style');
+    eraserButton.removeAttribute('style');
+    randomButton.removeAttribute('style');
+}
