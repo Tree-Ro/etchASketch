@@ -1,7 +1,7 @@
 const container = document.querySelector('#container');
 
-function createRows() {
-    for (i = 0; i < 16; ++i) {
+function createRows(amount) {
+    for (i = 0; i < amount; ++i) {
         const row = document.createElement('div');
         row.setAttribute('class', 'row');
         container.appendChild(row);
@@ -19,9 +19,9 @@ function createCells() {
     });
 }
 
-function createGrid() {
-    createRows();
+function createGrid(amount) {
+    createRows(amount);
     createCells();
 }
 
-createGrid();
+createGrid(16);
