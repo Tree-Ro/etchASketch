@@ -12,14 +12,21 @@
         <div id="containerContainer">
             <div id="container"></div>
             <div id="options">
-                <input type="color" id="colorInterface" />
-                <div id="colorPicker"></div>
+                <input type="color" id="colorInterface" value="#333333" />
+                <!-- <div id="colorPicker"></div> -->
                 <button id="colorMode">Color Mode</button>
                 <button id="eraser">Eraser</button>
                 <button id="rainbowMode">Random</button>
                 <button id="clear">Clear</button>
                 <div id="sizeDisplay">16x16</div>
-                <input type="range" id="canvasSize" />
+                <input
+                    type="range"
+                    id="canvasSize"
+                    min="8"
+                    max="100"
+                    value="16"
+                    step="4"
+                />
             </div>
         </div>
     </body>

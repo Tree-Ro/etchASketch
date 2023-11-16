@@ -1,9 +1,29 @@
+// Declaring Important constants
 const container = document.querySelector('#container');
+const colorPicker = document.querySelector('#colorPicker');
+const defaultMode = 'colorMode';
+const defaultSize = 16;
+const body = document.querySelector('body');
+
+createGrid(defaultSize);
+
+const cells = document.querySelectorAll('.cell');
+
+//Currently Bugged
+//Loses track of button state if fired over one element and dropped over other
+let mousedown = 0;
+body.addEventListener('mousedown', () => {
+    mousedown = 1;
+});
+body.addEventListener('mouseup', () => {
+    mousedown = 0;
+});
 
 function createRows(amount) {
     for (i = 0; i < amount; ++i) {
         const row = document.createElement('div');
         row.setAttribute('class', 'row');
+        row.setAttribute('draggable', 'false');
         container.appendChild(row);
     }
 }
@@ -14,6 +34,7 @@ function createCells() {
         for (i = 0; i < rows.length; ++i) {
             const cell = document.createElement('div');
             cell.setAttribute('class', 'cell');
+            cell.setAttribute('draggable', 'false');
             row.appendChild(cell);
         }
     });
@@ -24,4 +45,24 @@ function createGrid(amount) {
     createCells();
 }
 
-createGrid(16);
+function draw() {
+    cells.forEach((cell) => {
+        cell.addEventListener('mouseover', () => {
+            if (mousedown === 1) {
+                cell.setAttribute(
+                    'style',
+                    `background-color: ${colorInterface.value}`
+                );
+            }
+        });
+    });
+}
+draw();
+
+function colorMode() {}
+
+function eraser() {}
+
+function clearCanvas() {}
+
+function changeSize() {}

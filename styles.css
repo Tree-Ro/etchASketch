@@ -40,12 +40,34 @@ body h1 {
     
 }
 
-#colorInterface {
-    display: none;
+input[type="color"] {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.226);
 }
+#colorInterface {
+    padding: 0;
+    border: none;
+    border-radius: 100%;
+  }
+  #colorInterface::-webkit-color-swatch {
+    border: none;
+    border-radius: 100%;
+    padding: 0;
+  }
+  #colorInterface::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 100%;
+    padding: 0;
+  }
 
 #colorPicker {
-    background-color: #333;
     width: 100px;
     height: 100px;
     border-radius: 100%;
@@ -53,12 +75,18 @@ body h1 {
     margin: 15%
 }
 
-#options button, #options input {
+#options button {
     width: 80%;
     margin: 15%;
+    border: 2px solid rgba(0, 0, 0, 0.555);
+    border-radius: 3px;
 }
 
-button:hover, #colorPicker:hover {
+#sizeDisplay {
+    margin-top:10px;
+}
+
+button:hover, #colorInterface:hover {
     transform: scale(1.05);
     transition: transform 0.1s ease-in-out;
     cursor: pointer;
@@ -80,6 +108,7 @@ button:hover, #colorPicker:hover {
 .cell {
     border-right:solid 1px black;
     flex-grow: 1;
+    cursor: crosshair;
 } 
 
 .row {
