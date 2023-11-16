@@ -1,6 +1,26 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 #container {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
-    justify-content: ;
+
+    min-height: 100vh;
+    max-width: 100vh;
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+.cell {
+    border:solid 1px blue;
+    flex-grow: 1;
+} 
+
+.row {
+    display: flex; 
+    flex-direction: row;
+    border:solid 1px red;
+    flex-grow: 1;
 }
