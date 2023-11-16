@@ -13,7 +13,8 @@ storeColorListener();
 
 const cells = document.querySelectorAll('.cell');
 
-initialiseButtons();
+initialiseOptions();
+initialiseInput();
 
 function createRows(amount) {
     for (i = 0; i < amount; ++i) {
@@ -68,7 +69,7 @@ function draw() {
     });
 }
 
-function initialiseButtons() {
+function initialiseOptions() {
     colorButton.addEventListener('click', () => {
         colorMode();
     });
@@ -89,12 +90,6 @@ function storeColorListener() {
         storedColor = colorInterface.value;
         colorMode(); // If user changes value activate colorMode
     });
-}
-
-function removeButtonHighlight() {
-    colorButton.removeAttribute('style');
-    eraserButton.removeAttribute('style');
-    randomButton.removeAttribute('style');
 }
 
 function colorMode() {
@@ -136,12 +131,33 @@ function getRandomColor() {
 }
 
 function clearCanvas() {
+    const cells = document.querySelectorAll('.cell');
     cells.forEach((cell) => {
         cell.setAttribute('style', `background-color: white`);
     });
 }
 
-function changeSize() {}
+function initialiseInput() {
+    canvasSize.addEventListener('change', () => {
+        changeSize();
+    });
+}
+
+function emptyGrid() {
+    const rows = document.querySelectorAll('.row');
+    rows.forEach((row) => {
+        row.remove();
+    });
+}
+
+function changeSize() {
+    sizeDisplay.textContent =
+        `${canvasSize.value}` + 'x' + `${canvasSize.value}`;
+
+    emptyGrid();
+
+    createGrid(canvasSize.value);
+}
 
 function removeButtonHighlight() {
     colorButton.removeAttribute('style');
