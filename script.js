@@ -6,6 +6,7 @@ const defaultSize = 16;
 const body = document.querySelector('body');
 
 createGrid(defaultSize);
+draw();
 
 const cells = document.querySelectorAll('.cell');
 
@@ -42,23 +43,36 @@ function createGrid(amount) {
 }
 
 function draw() {
-    cells.forEach((cell) => {
-        cell.addEventListener('mouseover', () => {
-            if (mousedown === 1) {
-                cell.setAttribute(
-                    'style',
-                    `background-color: ${colorInterface.value}`
-                );
-            }
-        });
+    container.addEventListener('click', (currentMouseover) => {
+        if (currentMouseover.target.classList.contains('cell')) {
+            currentMouseover.target.setAttribute(
+                'style',
+                `background-color: ${colorInterface.value};`
+            );
+        }
+    });
+
+    container.addEventListener('mouseover', (currentMouseover) => {
+        if (
+            currentMouseover.target.classList.contains('cell') &&
+            currentMouseover.buttons === 1
+        ) {
+            currentMouseover.target.setAttribute(
+                'style',
+                `background-color: ${colorInterface.value};`
+            );
+        }
     });
 }
-draw();
 
 function colorMode() {}
 
 function eraser() {}
 
-function clearCanvas() {}
+function clearCanvas() {
+    cells.forEach((cell) => {
+        cell.setAttribute('style', `background-color: white`);
+    });
+}
 
 function changeSize() {}
