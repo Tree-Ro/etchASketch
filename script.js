@@ -41,7 +41,7 @@ function createGrid(amount) {
 }
 
 function draw() {
-    container.addEventListener('click', (currentMouseover) => {
+    container.addEventListener('mousedown', (currentMouseover) => {
         if (currentMouseover.target.classList.contains('cell')) {
             if (random === true) {
                 colorInterface.value = getRandomColor();
